@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn import preprocessing 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn.metrics import jaccard_similarity_score 
 from sklearn.externals import joblib
 
@@ -35,8 +35,6 @@ print('jaccard similarity score = ',  jaccard_similarity_score(y_test, y_pred))
 
 cm = confusion_matrix(y_test, y_pred) 
 print('confusion matrix =', cm) 
-print('The details for confusion matrix is =') 
-print (classification_report(y_test, y_pred)) 
 
 # Save the model to disk
 joblib.dump(classifier, 'classifier.joblib')

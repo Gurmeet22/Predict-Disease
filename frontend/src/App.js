@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
+require('dotenv').config();
 
 class App extends Component {
 
@@ -39,7 +40,7 @@ class App extends Component {
     handlePredictClick = (event) => {
         const formData = this.state.formData;
         this.setState({ isLoading: true });
-        fetch('http://127.0.0.1:5000/prediction/', {
+        fetch(process.env.API_URL, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
