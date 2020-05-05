@@ -13,13 +13,13 @@ app = Api(app=flask_app,
 name_space = app.namespace('prediction', description='Prediction APIs')
 
 model = app.model('Prediction params',
-                  {'age': fields.PositiveInteger(required=True,
+                  {'age': fields.Integer(required=True,
                                                  description="Age",
                                                  help="Age cannot be blank"),
                    'Sex_male': fields.Integer(required=True,
                                             description="Gender",
                                             help="Gender cannot be blank"),
-                   'cigsPerDay': fields.PositiveInteger(required=True,
+                   'cigsPerDay': fields.Integer(required=True,
                                               description="Cigarettes per day",
                                               help="Cigarettes per day cannot be blank"),
                    'totChol': fields.Float(required=True,
@@ -50,8 +50,10 @@ class MainClass(Resource):
     def post(self):
         try:
             formData = request.json
-            data = [val for val in formData.values()]
+            data = [float(val) for val in formData.values()]
+            print(data)
             prediction = classifier.predict(np.array(data).reshape(1, -1))
+            print(prediction)
             types = {0: "No Risk",
                      1: "High Risk "}
             response = jsonify({
